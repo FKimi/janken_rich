@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ひろゆきとじゃんけんゲーム</title>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
+  <link rel="stylesheet" href="css/janken.css">
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+  <main>
+ 
+    <section>
+      <h1>ひろゆきとじゃんけんゲーム</h1>
+    </section>
+
+    <div class="hiroyuki-photo">
+       <img src="https://type.jp/et/feature/wp-content/uploads/2024/04/hiroyuki.jpg" alt="ひろゆき" class="hiroyuki-photo">
+     </div>
+
+     <section>
+      <div class="bubble">
+          <p id="message">「それってあなたの感想ですよね？」</p>
+      </div>
+     </section>
+
+
+    <section>
+      <p id="computer">ひろゆきの手は？？</p>
+    </section>
+
+    <section>
+      <p id="result">勝敗は？？</p>
+    </section>
+
+    <section>
+      <button class="hand" data-hand="グー">✊</button>
+      <button class="hand" data-hand="チョキ">✌️</button>
+      <button class="hand" data-hand="パー">🖐️</button>
+    </section>
+  </main>
+
+  <script>
+    const hiroyukiMessages = {
+      win: [
+        "ジャンケンに勝つって、そんなに嬉しいですか？",
+        "でもそれって、ただの運ですよね？",
+        "まあ、僕に勝ってもなにも得しないですよね？",
+        "でも、それってジャンケンですよね？",
+        "まあ、勝っちゃいましたね。これが現実です。",
+        "勝ちましたけど、何か問題でも？",
+        "勝つのは当然ですよね、普通に考えて。"
+      ],
+      lose: [
+        "まあ、ジャンケンで勝ってもねえ（笑）",
+        "あれ、ジャンケンも弱いんですねえ（笑）",
+        "あれおかしいな、負けようと思ったのに（笑）",
+        "あれ、そんなに心理戦弱かったですっけ（笑）",
+        "負けましたけど、それがどうしたんですか？",
+        "負けることもありますよ、人生そんなもんです。",
+        "負けたからって、別にどうでもいいんですけどね。"
+      ],
+      draw: [
+        "そろそろ結論出しましょうか（笑）",
+        "あれ、次はパーを出す顔してますね（笑）",
+        "効率的じゃないですよね、あいこって",
+        "次はグーを出しますか？はいかいいえで答えてください",
+        "あいこって、要するに誰も得してないですよね",
+        "あいこですか、まあ、そういうこともありますよね。",
+        "あいこって、結局意味ないですよね。",
+        "あいこですけど、何か問題でも？"
+      ]
+    };
+
+    function getRandomMessage(type) {
+      const messages = hiroyukiMessages[type];
+      return messages[Math.floor(Math.random() * messages.length)];
+    }
+    // ボタンがクリックされたときの処理
+    $(".hand").on("click", function () { 
+    // プレイヤーの手を覚える
+    const playerHand = $(this).data('hand'); 
+  
+    // コンピュータの手を決める
+    const hands = ['グー', 'チョキ', 'パー'];  //
+    const randomNumber = Math.floor (Math.random() * 3); 
+    const hiroyukiHand = hands[randomNumber]; 
+  
+    // コンピュータの手を画面に表示
+    $('#computer').text('ひろゆきの手は ' + hiroyukiHand);
+
+    //勝敗の判定
+     if (playerHand === hiroyukiHand) {
+      //あいこの場合
+      result = 'draw';
+      $("#result").text('あいこ');
+    
+    } else if (
+        (playerHand === 'グー' && hiroyukiHand === 'チョキ') ||
+        (playerHand === 'チョキ' && hiroyukiHand === 'パー') ||
+        (playerHand === 'パー' && hiroyukiHand === 'グー')
+      ) { 
+        result = 'win';
+        $("#result").text('あなたの勝ち');
+      //それ以外（負ける場合）
+     } else  {
+      result = 'lose';
+      $("#result").text('あなたの負け');
+     }
+    // ひろゆきの言葉を表示
+    $("#message").text(getRandomMessage(result));
+    });
+</script>
+
+</body>
+
+</html>

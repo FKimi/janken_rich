@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  button {
+    width: 300px;
+    height: 100px;
+  }
+  
+  main {
+    max-width: 680px;
+    height: 100vh;
+    margin: 0 auto;
+  }
+  
+  section {
+    height: calc(50vh/4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hiroyuki-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 20px auto;
+  }
+  
+  .hand {
+    margin: 10px;              /* 周りに余白 */
+    background: blue;       /* 緑色の背景 */
+    color: white;              /* 文字を白に */
+  }
+  
+/* 吹き出し枠を作る */
+  .bubble {
+   position: relative;  /* 矢印の位置決めに必要 */
+   background: #fff;    /* 背景を白に */
+   border: 4px solid #4a90e2;  /* 青い枠線 */
+   border-radius: 10px;  /* 角を丸く */
+   padding: 15px;       /* 内側の余白 */
+   margin: 30px 20px;   /* 外側の余白 */
+   max-width: 80%;      /* 幅を制限 */
+   margin-left: auto;   /* 中央揃え */
+   margin-right: auto;  /* 中央揃え */
+}
+
+/* 吹き出しの矢印（上向き）を作る */
+  .bubble:after { 
+   content: '';         /* 空の要素を作る */
+   position: absolute;  /* 位置を自由に決められるように */
+   top: -20px;         /* 上に20px移動 */
+   left: 50%;          /* 左から50%の位置 */
+   margin-left: -10px;  /* 矢印の幅の半分左に移動して中央揃え */
+   border-width: 10px;  /* 矢印のサイズ */
+   border-style: solid; /* 線のスタイル */
+  /* 透明な三角形を作り、下だけ青色にして矢印に */
+   border-color: transparent transparent #4a90e2 transparent;
+}
+
